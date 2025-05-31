@@ -1,6 +1,6 @@
 # Aplikasi Jadwal Mingguan Sekolah
 
-Aplikasi manajemen jadwal mingguan sekolah sederhana. Dibuat dengan Flask (mengikuti arsitektur MVC).
+Aplikasi manajemen jadwal mingguan sekolah sederhana. Dibuat dengan Flask (mengikuti arsitektur MVC dari Sir. Sepri).
 
 ## Fitur
 
