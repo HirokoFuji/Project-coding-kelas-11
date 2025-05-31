@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Ubah Aktivitas</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="day" class="form-label">Hari</label>
+                        <select class="form-select" id="day" name="day" required>
+                            <option value="">Pilih Hari</option>
+                            <option value="Senin" {% if schedule.day == 'Senin' %}selected{% endif %}>Senin</option>
+                            <option value="Selasa" {% if schedule.day == 'Selasa' %}selected{% endif %}>Selasa</option>
+                            <option value="Rabu" {% if schedule.day == 'Rabu' %}selected{% endif %}>Rabu</option>
+                            <option value="Kamis" {% if schedule.day == 'Kamis' %}selected{% endif %}>Kamis</option>
+                            <option value="Jumat" {% if schedule.day == 'Jumat' %}selected{% endif %}>Jumat</option>
+                            <option value="Sabtu" {% if schedule.day == 'Sabtu' %}selected{% endif %}>Sabtu</option>
+                        </select>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="start_time" class="form-label">Waktu Mulai</label>
+                            <input type="time" class="form-control" id="start_time" name="start_time" 
+                                   value="{{ schedule.start_time }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="end_time" class="form-label">Waktu Selesai</label>
+                            <input type="time" class="form-control" id="end_time" name="end_time" 
+                                   value="{{ schedule.end_time }}" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="activity" class="form-label">Aktivitas</label>
+                        <input type="text" class="form-control" id="activity" name="activity" 
+                               value="{{ schedule.activity }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Lokasi (Opsional)</label>
+                        <input type="text" class="form-control" id="location" name="location" 
+                               value="{{ schedule.location }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Deskripsi (Opsional)</label>
+                        <textarea class="form-control" id="description" name="description" 
+                                  rows="3">{{ schedule.description }}</textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ url_for('schedule.index') }}" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i> Kembali ke Jadwal
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-save"></i> Simpan Perubahan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

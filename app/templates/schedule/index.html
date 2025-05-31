@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Jadwal Mingguan Sekolah</h5>
+                <a href="{{ url_for('schedule.add') }}" class="btn btn-primary btn-sm">
+                    <i class="bi bi-plus-circle"></i> Tambah
+                </a>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    {% for day in days %}
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card mb-3">
+                            <div class="card-header day-header">
+                                {{ day }}
+                            </div>
+                            <div class="card-body p-2">
+                                {% set day_schedules = schedules|selectattr('day', 'equalto', day)|list %}
+                                {% if day_schedules %}
+                                    {% for schedule in day_schedules %}
+                                    <div class="card schedule-card mb-2">
+                                        <div class="card-body p-2">
+                                            <div class="d-flex justify-content-between align-items-start">
+                                                <div>
+                                                    <h6 class="mb-1">{{ schedule.activity }}</h6>
+                                                    <small class="text-muted d-block">
+                                                        <i class="bi bi-clock"></i> {{ schedule.start_time }} - {{ schedule.end_time }}
+                                                    </small>
+                                                    {% if schedule.location %}
+                                                    <small class="text-muted d-block">
+                                                        <i class="bi bi-geo-alt"></i> {{ schedule.location }}
+                                                    </small>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="btn-group btn-group-sm">
+                                                    <a href="{{ url_for('schedule.edit', id=schedule.id) }}" class="btn btn-outline-primary btn-sm">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </a>
+                                                    <a href="{{ url_for('schedule.delete', id=schedule.id) }}" 
+                                                       class="btn btn-outline-danger btn-sm"
+                                                       onclick="return confirm('Hapus aktivitas ini?')">
+                                                        <i class="bi bi-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            {% if schedule.description %}
+                                            <small class="text-muted d-block mt-1">{{ schedule.description }}</small>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <p class="text-muted text-center mb-0 py-2">Tidak ada aktivitas</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
